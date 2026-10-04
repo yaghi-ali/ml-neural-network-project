@@ -1,41 +1,26 @@
-# ml-neural-network-project
+# Signal processing and machine learning
 
-# Neural Networks Study Project (Machine Learning)
+Ali Yaghi — academic signal-regression work and reproducible synthetic benchmarks.
 
-This repository contains my study project on neural networks, focused on building, training, and evaluating models for supervised learning.
-The work includes data preprocessing, model design (MLP/CNN), training strategies, and performance analysis.
+## Tested entry point
 
-## Objectives
-- Implement a full ML pipeline: preprocessing → training → evaluation
-- Compare model architectures (baseline vs neural networks)
-- Track metrics and analyze errors (false positives/negatives where relevant)
-
-## Project Structure
-- `src/` : main Python code (dataset, model, training, evaluation)
-- `notebooks/` : experiments and visual exploration (optional)
-- `results/` : exported plots and metrics (figures, CSV/JSON)
-- `data/` : local data (not pushed if large/private)
-
-## Methods (Summary)
-- Data processing: normalization, windowing (if time-series), train/val/test split
-- Models: MLP (dense), optional CNN (1D) depending on signals/time-series
-- Training: early stopping, learning-rate tuning, metric monitoring
-- Evaluation: MAE/MSE for regression or accuracy/F1/AUROC for classification
-
-## Results (Example)
-Add your real results here when ready:
-- Best model: MLP (3 dense layers)
-- Metric: MAE = X.XX (validation), MSE = X.XX (test)
-- Notes: improved stability after normalization + early stopping
-
-## How to Run
-
-### 1) Create environment & install dependencies
 ```bash
-python -m venv .venv
-# Windows:
-.venv\Scripts\activate
-# macOS/Linux:
-source .venv/bin/activate
+python -m pip install -r requirements-demo.txt
+python signal_pipeline.py
+python signal_pipeline.py --neural --output neural_metrics.json
+python -m unittest -v test_signal_pipeline
+```
 
-pip install -r requirements.txt
+`signal_pipeline.py` generates independent noisy sinusoid datasets (500 training, 200 test, seed 42). It estimates **amplitude in arbitrary units**, using RMS, mean absolute value and FFT amplitude features. Scaling is fitted on training data only. A Ridge model and an optional MLP are compared with a conventional FFT baseline. The FFT baseline is slightly better in this example; the code does not imply an AI advantage or industrial performance.
+
+## Original research code
+
+The historical `src/` directory is retained for provenance. It contains TensorFlow experiments on interferometric signals. It is **not the supported entry point**: local paths and assumptions about experimental file/channel formats require adaptation. In particular, `src/evaluate.py` evaluates the configured dataset rather than an independent held-out dataset and does not apply the fitted training scaler. Do not use its output as an independent test score.
+
+For experimental work, record channel semantics explicitly, split by acquisition/trajectory **before** overlapping windows, and save the fitted preprocessing together with the model. No experimental datasets or trained laboratory models are redistributed here.
+
+The standalone benchmark above is a new, clearly labelled reproducible addition, not a replacement for validation on the original displacement experiment.
+
+See [VALIDATION.md](VALIDATION.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Related projects: [scientific portfolio](https://github.com/yaghi-ali/scientific-projects). Contact: contact@optiia-consulting.fr.

@@ -215,3 +215,20 @@ data/processed/
 *.pth
 results/tmp/
 .vscode/
+
+# Portfolio publication safeguards
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+.ipynb_checkpoints/
+trace1.csv
+*.pickle
+*.pkl
+*.joblib
+*.keras
+*.h5
+*.npy
+*.npz

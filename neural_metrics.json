@@ -1,0 +1,9 @@
+{
+  "seed": 42,
+  "train_samples": 500,
+  "test_samples": 200,
+  "model": "MLP",
+  "model_mae": 0.02927574133797055,
+  "fft_mae": 0.013045668364732376,
+  "data": "synthetic fixed-frequency sinusoids; amplitude in arbitrary units"
+}
